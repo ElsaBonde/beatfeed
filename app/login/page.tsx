@@ -60,7 +60,7 @@ export default function LoginPage() {
       </div>
       <p>
         Not a member?{" "}
-        <Link href="/register">Become a part of our community here!</Link>
+        <Link href="/register" className="font-semibold">Become a part of our community here!</Link>
       </p>
     </div>
   );

@@ -15,8 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body>
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-3xl mx-auto bg-white p-4 flex flex-col gap-4">
           
           <AuthProvider><Header />{children}</AuthProvider>
         </div>
