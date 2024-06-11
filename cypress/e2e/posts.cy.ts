@@ -28,7 +28,7 @@ describe("Show all posts", () => {
         cy.contains(post.author.userName).should("exist");
         cy.contains(post.title).should("exist");
         cy.contains(post.content).should("exist");
-        cy.get(`a[href="${post.song}"]`).should("exist");
+        cy.get('iframe').should('have.attr', 'src').should('include', "https://www.youtube.com/embed/");
         cy.contains("likes").should("exist");
       });
     });

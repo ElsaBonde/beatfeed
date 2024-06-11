@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import { AuthProvider } from "./authContext";
 import Header from "./components/Header";
-
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "BeatFeed",
-  description: "Share your favorite beats with the world",
+  description: "Share your favorite beats with the world!",
 };
 
 export default function RootLayout({
@@ -19,8 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="max-w-2xl mx-auto">
-        <Header />
-        {children}
+          <Header />
+          <AuthProvider>{children}</AuthProvider>
         </div>
       </body>
     </html>

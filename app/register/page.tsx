@@ -18,15 +18,20 @@ export default function RegisterPage() {
       setRegisterError("");
     } catch (error) {
       console.error("Error registering user:", error);
+      if (username === "" || password === "") {
+        setRegisterError("Username or password is missing.");
+      } else {
       setRegisterError("Username already exists. Please try another.");
+      }
     }
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center bg-stone-200">
-      <h1>Register to BeatFeed</h1>
+    <div className="flex flex-col min-h-screen p-8 bg-stone-200 gap-12">
+      <h1 className="text-xl">Register to BeatFeed</h1>
       <div className="flex flex-col gap-4">
-        <form className="flex flex-col" onSubmit={handleRegister}>
+        <form className="flex flex-col gap-3" onSubmit={handleRegister}>
+          <div className="flex flex-col gap-2">
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -34,15 +39,18 @@ export default function RegisterPage() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-          {registerError && <p className="text-red-500">{registerError}</p>}
+          </div>
+          <div className="flex flex-col gap-2">
           <label htmlFor="password">Password</label>
           <input
             type="password"
             name="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit">Register</button>
+            />
+            {registerError && <p className="text-red-500">{registerError}</p>}
+          </div>
+          <button type="submit" className="bg-black text-white p-2 rounded-sm">Register</button>
         </form>
       </div>
     </div>

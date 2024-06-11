@@ -3,16 +3,14 @@
 import { db } from "@/prisma/db";
 
 export async function logInUser(username: string, password: string) {
-  //jämför input från användaren med databasen och loggar in användaren om den finns och användarnamn och lösenord stämmer
   const user = await db.user.findFirst({
     where: {
       userName: username,
       password: password,
     },
   });
-
-  if (!user) {
-    console.log("User does not exist.");
+  if (!user || user.userName !== username || user.password !== password) {
+    console.log("Username or password incorrect.");
     return null;
   }
   return user;
@@ -26,6 +24,13 @@ export async function registerUser(username: string, password: string) {
         password: password,
       },
     });
+    //om användarnamn är upptaget ska ett fel kastas
+    if (!user) {
+      throw new Error("Username already exists.");
+    } 
+    if (!user.userName || !user.password) {
+      throw new Error("Username or password is missing.");
+    }
     return user;
   } catch (error) {
     console.error("Error registering user:", error);

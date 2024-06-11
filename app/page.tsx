@@ -1,4 +1,5 @@
 import { getPosts } from "./actions/postActions";
+import WelcomeMessage from "./components/WelcomeMessage";
 
 export default async function Home() {
   const posts = await getPosts();
@@ -11,6 +12,7 @@ export default async function Home() {
     <div>
       <main>
         <div className="flex flex-col gap-4">
+          <WelcomeMessage />
           {posts.map((post) => (
             <div key={post.id} className="p-4 bg-stone-200 rounded-sm">
               <div className="video-container">
@@ -39,7 +41,7 @@ export default async function Home() {
   );
 }
 
-function getYouTubeVideoId(url: string) {
+export function getYouTubeVideoId(url: string) {
   const match = url.match(
     /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
   );

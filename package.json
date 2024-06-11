@@ -11,8 +11,8 @@
     "push": "prisma db push",
     "seed": "prisma db seed"
   },
-  "prisma": {
-    "seed": "tsx prisma/seed/seed.ts"
+ "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.15.0",
