@@ -17,8 +17,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className="max-w-2xl mx-auto">
-          <Header />
-          <AuthProvider>{children}</AuthProvider>
+          
+          <AuthProvider><Header />{children}</AuthProvider>
         </div>
       </body>
     </html>
