@@ -68,3 +68,21 @@ describe("Play song", () => {
     });
   });
 });
+
+describe("Add new post", () => {
+  it("should be able to add a new post", () => {
+    cy.visit("http://localhost:3000");
+    cy.contains("Add new").click();
+    cy.visit("http://localhost:3000/addPost");
+    cy.get("input[name=title]").type("Crazy frog");
+    cy.get("textarea[name=content]").type("This song is tha shit, everybody loves is! (or not)");
+    cy.get("input[name=song]").type("https://www.youtube.com/watch?v=P1KT_I1LmtA");
+    cy.get("button[type=submit]").click();
+    cy.contains("Crazy frog").should("exist");
+    cy.contains("This song is tha shit, everybody loves is! (or not)").should("exist");
+    cy.get('iframe').should('have.attr', 'src').should('include', "https://www.youtube.com/embed/");
+  });
+  it("should not be possible to add a new post without missing values", () => {
+    
+  });
+})

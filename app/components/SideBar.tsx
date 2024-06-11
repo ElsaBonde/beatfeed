@@ -1,4 +1,4 @@
-import AddNewPost from "./AddNewPost";
+import AddNewPost from "./AddNewPostButton";
 import LogInOutButton from "./LogInOutButton";
 import WelcomeMessage from "./Username";
 

@@ -1,16 +1,17 @@
 "use client";
 
-import { useAuth } from "../authContext";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import { useAuth } from "../authContext";
+import Link from "next/link";
 
-export default function AddNewPost() {
+export default function AddNewPostButton() {
   const { isLoggedIn } = useAuth();
   return (
     <>
       {isLoggedIn && (
-        <div className="flex items-center gap-1">
+        <Link href="/addPost" className="flex items-center gap-1">
           <AddAPhotoIcon /> <p>Add new</p>
-        </div>
+        </Link>
       )}
     </>
   );

@@ -1,4 +1,9 @@
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { getPosts } from "../actions/postActions";
+import Likes from "./Likes";
+
+dayjs.extend(relativeTime);
 
 export default async function Posts() {
   const posts = await getPosts();
@@ -23,13 +28,16 @@ export default async function Posts() {
             ></iframe>
           </div>
           <div className="p-3">
-          <p>{post.likes} likes</p>
-          <p className="font-bold">{post.author.userName}</p>
-          <div>
+          
+            <Likes />
+              <p className="font-bold">{post.likes} likes</p>
+            <p className="font-semibold">{post.author.userName}</p>
             <p>{post.title}</p>
-          </div>
-          <p>{post.content}</p>
-          <p className="">Posted för 5 minuter sen</p>
+
+            <p>{post.content}</p>
+            <p className="text-slate-500 text-xs">
+              Posted {dayjs(post.createdAt).fromNow()}
+            </p>
           </div>
         </div>
       ))}
