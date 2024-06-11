@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { registerUser } from "../actions/userActions";
+import RegisterVideo from "../components/RegisterVideo";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -28,7 +29,10 @@ export default function RegisterPage() {
 
   return (
     <div className="flex flex-col min-h-screen p-8 bg-stone-200 gap-12">
+      <div className="flex flex-col gap-4">
       <h1 className="text-xl">Register to BeatFeed</h1>
+      <RegisterVideo />
+      </div>
       <div className="flex flex-col gap-4">
         <form className="flex flex-col gap-3" onSubmit={handleRegister}>
           <div className="flex flex-col gap-2">
