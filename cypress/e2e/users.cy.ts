@@ -26,14 +26,16 @@ describe('Register new user', () => {
     cy.get('input[name="username"]').type('cypressUser');
     cy.get('input[name="password"]').type('iLoveCypress');
     cy.get('button[type="submit"]').click();
+    cy.visit('http://localhost:3000/')
     cy.contains('Welcome, coolDog').should('exist');
   })
 
-  it('should not be possible to sign up with existing username', () => {
+  it('should not be possible to register with existing username', () => {
     cy.visit('http://localhost:3000/register')
     cy.get('input[name="username"]').type('coolCat');
     cy.get('input[name="password"]').type('password1');
     cy.get('button[type="submit"]').click();
+    cy.contains('Username already exists. Please try another.').should('exist');
     cy.contains('coolCat').should('not.exist');
   })
 });
