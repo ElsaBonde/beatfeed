@@ -15,7 +15,7 @@ export default async function Posts() {
   return (
     <>
       {posts.map((post) => (
-        <div key={post.id} className=" bg-stone-100 rounded-md">
+        <div key={post.id} className=" bg-stone-100 rounded-md border-2">
           <div className="video-container">
             <iframe
               width="100%"
@@ -24,7 +24,7 @@ export default async function Posts() {
                 post.song
               )}`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              className=" h-96"
+              className=" h-96 rounded-t-md"
             ></iframe>
           </div>
           <div className="p-3">

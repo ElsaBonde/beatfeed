@@ -24,11 +24,10 @@ export async function registerUser(username: string, password: string) {
         password: password,
       },
     });
-    //om användarnamn är upptaget ska ett fel kastas
     if (!user) {
       throw new Error("Username already exists.");
     } 
-    if (!user.userName || !user.password) {
+    if (!username || !user.password || username === "" || password === "") {
       throw new Error("Username or password is missing.");
     }
     return user;
