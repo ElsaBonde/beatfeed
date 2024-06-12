@@ -32,7 +32,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen p-8 bg-stone-200 gap-12">
+    <div className="flex flex-col flex-1 min-h-screen p-8 bg-stone-200 gap-12">
       <h1 className="text-xl">Login to BeatFeed</h1>
       <div className="flex flex-col gap-4">
         <form className="flex flex-col gap-3" onSubmit={handleFormSubmit}>
@@ -57,11 +57,11 @@ export default function LoginPage() {
           </div>
           <button type="submit" className="bg-black text-white p-2 rounded-sm">Login</button>
         </form>
-      </div>
       <p>
         Not a member?{" "}
-        <Link href="/register" className="font-semibold">Become a part of our community here!</Link>
+        <Link href="/register" className="font-semibold">Become a part of our community here! 🎶</Link>
       </p>
+      </div>
     </div>
   );
 }

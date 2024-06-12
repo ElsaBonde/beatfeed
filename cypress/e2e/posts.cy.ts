@@ -1,6 +1,9 @@
 import { PostWithAuthor } from "@/types";
 
 describe("Show all posts", () => {
+  beforeEach(() => {
+    cy.exec("npm run reset && npm run seed");
+  });
   it("should display all posts", () => {
     cy.visit("http://localhost:3000");
     cy.request("GET", "http://localhost:3000").then((response) => {
@@ -12,7 +15,7 @@ describe("Show all posts", () => {
           song: "https://www.youtube.com/watch?v=QFcv5Ma8u8k",
           likes: 1,
           author: { userName: "elsa" },
-          id: "clwad7xzi000108k0fosm1qs3"
+          id: "clwad7xzi000108k0fosm1qs3",
         },
         {
           title: "Tha Bomb",
@@ -28,7 +31,9 @@ describe("Show all posts", () => {
         cy.contains(post.author.userName).should("exist");
         cy.contains(post.title).should("exist");
         cy.contains(post.content).should("exist");
-        cy.get('iframe').should('have.attr', 'src').should('include', "https://www.youtube.com/embed/");
+        cy.get("iframe")
+          .should("have.attr", "src")
+          .should("include", "https://www.youtube.com/embed/");
         cy.contains("likes").should("exist");
       });
     });
@@ -47,7 +52,7 @@ describe("Play song", () => {
           song: "https://www.youtube.com/watch?v=QFcv5Ma8u8k",
           likes: 1,
           author: { userName: "elsa" },
-          id: "clwad7xzi000108k0fosm1qs3"
+          id: "clwad7xzi000108k0fosm1qs3",
         },
         {
           title: "Tha Bomb",
@@ -60,11 +65,10 @@ describe("Play song", () => {
       ];
 
       //får fixa detta när jag vet hur jag ska ha frontend
-   /*    posts.forEach((post: PostWithAuthor) => {
+      /*    posts.forEach((post: PostWithAuthor) => {
         
         });
       }); */
-
     });
   });
 });
@@ -75,14 +79,20 @@ describe("Add new post", () => {
     cy.contains("Add new").click();
     cy.visit("http://localhost:3000/addPost");
     cy.get("input[name=title]").type("Crazy frog");
-    cy.get("textarea[name=content]").type("This song is tha shit, everybody loves is! (or not)");
-    cy.get("input[name=song]").type("https://www.youtube.com/watch?v=P1KT_I1LmtA");
+    cy.get("textarea[name=content]").type(
+      "This song is tha shit, everybody loves is! (or not)"
+    );
+    cy.get("input[name=song]").type(
+      "https://www.youtube.com/watch?v=P1KT_I1LmtA"
+    );
     cy.get("button[type=submit]").click();
     cy.contains("Crazy frog").should("exist");
-    cy.contains("This song is tha shit, everybody loves is! (or not)").should("exist");
-    cy.get('iframe').should('have.attr', 'src').should('include', "https://www.youtube.com/embed/");
+    cy.contains("This song is tha shit, everybody loves is! (or not)").should(
+      "exist"
+    );
+    cy.get("iframe")
+      .should("have.attr", "src")
+      .should("include", "https://www.youtube.com/embed/");
   });
-  it("should not be possible to add a new post without missing values", () => {
-    
-  });
-})
+  it("should not be possible to add a new post without missing values", () => {});
+});

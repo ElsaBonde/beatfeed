@@ -10,7 +10,7 @@ export default function AddNewPostButton() {
     <>
       {isLoggedIn && (
         <Link href="/addPost" className="flex items-center gap-1">
-          <AddAPhotoIcon /> <p>Add new</p>
+          <AddAPhotoIcon /> <p>Add</p>
         </Link>
       )}
     </>

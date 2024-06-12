@@ -28,7 +28,7 @@ export default function AddPostPage() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen p-8 bg-stone-200 gap-12">
+    <div className="flex flex-col flex-1 min-h-screen p-8 bg-stone-200 gap-12">
       {isLoggedIn ? (
         <>
           <h1 className="text-xl">Add new post</h1>

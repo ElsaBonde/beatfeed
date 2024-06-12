@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "./authContext";
+import FooterMobile from "./components/FooterMobile";
 import Header from "./components/Header";
 import "./globals.css";
-import FooterMobile from "./components/FooterMobile";
+import SideBar from "./components/SideBar";
 
 export const metadata: Metadata = {
   title: "BeatFeed",
@@ -20,8 +21,11 @@ export default function RootLayout({
         <div className="max-w-3xl mx-auto bg-white p-4 flex flex-col gap-4">
           <AuthProvider>
             <Header />
+            <div className="flex gap-6 xs:flex-col md:flex-row">
+            <SideBar />
             {children}
             <FooterMobile />
+            </div>
           </AuthProvider>
         </div>
       </body>

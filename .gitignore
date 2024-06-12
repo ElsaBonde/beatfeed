@@ -3,9 +3,6 @@
 # compiled output
 prisma/**.db
 
-# cypress
-/cypress
-
 # dependencies
 /node_modules
 /.pnp
