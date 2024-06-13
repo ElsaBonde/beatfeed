@@ -1,10 +1,12 @@
 "use client";
 
+import { useState } from "react";
 import { createPost } from "../actions/postActions";
 import { useAuth } from "../authContext";
 
 export default function AddPostPage() {
   const { isLoggedIn, user } = useAuth();
+  const [registerError, setRegisterError] = useState("");
 
   const handleAddPost = async (event: any) => {
     event.preventDefault();
@@ -23,6 +25,9 @@ export default function AddPostPage() {
       form.song.value = "";
       window.location.href = "/";
     } catch (error) {
+      if (data.title === "" || data.content === "" || data.song === "") {
+        setRegisterError("Please fill in all the fields above.");
+      }
       console.error("Error creating post:", error);
     }
   };
@@ -36,16 +41,17 @@ export default function AddPostPage() {
             <form className="flex flex-col gap-3" onSubmit={handleAddPost}>
               <div className="flex flex-col gap-2">
                 <label htmlFor="title">Title</label>
-                <input type="text" name="title" required />
+                <input type="text" name="title" />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="content">Content</label>
-                <textarea name="content" required />
+                <textarea name="content" />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="song">Song url</label>
-                <input type="text" name="song" required />
+                <input type="text" name="song" />
               </div>
+              {registerError && <p className="text-red-500">{registerError}</p>}
               <button
                 type="submit"
                 className="bg-black text-white p-2 rounded-sm"

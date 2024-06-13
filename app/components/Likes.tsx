@@ -12,7 +12,7 @@ export default function Likes() {
 
   return <>
     <button onClick={handleLike}>
-      {isLiked ? <FavoriteOutlined color="error" className="h-7 w-7"/> : <FavoriteBorderOutlined className="h-7 w-7"/>}
+      {isLiked ? <FavoriteOutlined color="error" className="h-7 w-7" data-cy="liked"/> : <FavoriteBorderOutlined className="h-7 w-7" data-cy="notLiked"/>}
     </button>
   </>;
 }

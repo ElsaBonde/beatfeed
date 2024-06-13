@@ -15,7 +15,7 @@ export default async function Posts() {
   return (
     <>
       {posts.map((post) => (
-        <div key={post.id} className=" bg-stone-100 rounded-md border-2">
+        <div key={post.id} data-cy="post" className=" bg-stone-100 rounded-md border-2" >
           <div className="video-container">
             <iframe
               width="100%"
