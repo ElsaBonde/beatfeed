@@ -5,8 +5,8 @@ describe("Show all posts", () => {
     cy.exec("npm run reset && npm run seed");
   });
   it("should display all posts", () => {
-    cy.visit("http://localhost:3000");
-    cy.request("GET", "http://localhost:3000").then((response) => {
+    cy.visit("/");
+    cy.request("GET", "/").then((response) => {
       expect(response.status).to.eq(200);
       const posts: PostWithAuthor[] = [
         {
@@ -42,8 +42,8 @@ describe("Show all posts", () => {
 
 describe("Play song", () => {
   it("should play the song when user hits play", () => {
-    cy.visit("http://localhost:3000");
-    cy.request("GET", "http://localhost:3000").then((response) => {
+    cy.visit("/");
+    cy.request("GET", "/").then((response) => {
       expect(response.status).to.eq(200);
       const posts: PostWithAuthor[] = [
         {
@@ -75,9 +75,13 @@ describe("Play song", () => {
 
 describe("Add new post", () => {
   it("should be able to add a new post", () => {
-    cy.visit("http://localhost:3000");
-    cy.contains("Add new").click();
-    cy.visit("http://localhost:3000/addPost");
+    cy.visit("/login");
+    cy.get('input[name="username"]').type("coolCat");
+    cy.get('input[name="password"]').type("password1");
+    cy.get('button[type="submit"]').click();
+    cy.contains("coolCat").should("exist");
+    cy.contains("Add").click();
+    cy.url().should("include", "/addPost");
     cy.get("input[name=title]").type("Crazy frog");
     cy.get("textarea[name=content]").type(
       "This song is tha shit, everybody loves is! (or not)"

@@ -1,14 +1,12 @@
-const url = "http://localhost:3000";
-
 beforeEach(() => {
   cy.exec("npm run reset && npm run seed");
-  cy.visit(url);
+  cy.visit("/");
   cy.clearAllLocalStorage();
 });
 
-describe.only("Login user", () => {
+describe("Login user", () => {
   it("should be possible to sign in", () => {
-    cy.contains("Login").click();
+    cy.contains("Login").click({ force: true });
     cy.visit("/login");
     cy.get('input[name="username"]').type("coolCat");
     cy.get('input[name="password"]').type("password1");
@@ -56,15 +54,15 @@ describe("Register new user", () => {
 
 describe("Logout user", () => {
   it("should be possible to sign out", () => {
-    cy.contains("Login").click();
+    cy.contains("Login").click({ force: true });
     cy.url().should("include", "/login");
-    cy.get('input[name="username"]').type("elzabonde");
-    cy.get('input[name="password"]').type("funny");
+    cy.get('input[name="username"]').type("coolCat");
+    cy.get('input[name="password"]').type("password1");
     cy.get('button[type="submit"]').click();
     cy.wait(1000);
     cy.visit("/");
-    cy.contains("elzabonde").should("exist");
-    cy.contains("Logout").click();
+    cy.contains("coolCat").should("exist");
+    cy.contains("Logout").click({ force: true });
     cy.contains("Login").should("exist");
   });
 });

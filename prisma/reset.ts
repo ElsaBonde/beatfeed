@@ -1,6 +1,10 @@
 import { db } from "./db";
 
 async function main() {
+    //Never run this outside of test environment
+  if (process.env.NODE_ENV !== "test") return;
+
+  // Clear all data in the database so DON'T DO THIS IN PRODUCTION/DEVELOPMENT
   await db.post.deleteMany({});
   await db.user.deleteMany({});
 }
