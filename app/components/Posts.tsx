@@ -29,8 +29,8 @@ export default async function Posts() {
           </div>
           <div className="p-3">
           
-            <Likes />
-              <p className="font-bold">{post.likes} likes</p>
+            <Likes postId={post.id} startingLikes={post.likes}/>
+              
             <p className="font-semibold">{post.author.userName}</p>
             <p>{post.title}</p>
 
