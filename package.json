@@ -10,7 +10,6 @@
     "studio": "prisma studio",
     "push": "prisma db push",
     "seed": "prisma db seed",
-    "reset": "tsx prisma/reset.ts",
     "cy:dev": "next dev --port 3100",
     "cy:open": "dotenv -e .env.test -- cypress open --e2e -b chrome ",
     "test": "cross-env NODE_ENV=test start-server-and-test cy:dev http://localhost:3100 cy:open",

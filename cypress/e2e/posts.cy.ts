@@ -1,11 +1,11 @@
 describe("Show all posts", () => {
   beforeEach(() => {
-    cy.exec("npm run reset && npm run seed");
+    cy.task("reseed");
   });
 
   it("should show all posts", () => {
     cy.getAllPosts();
-    cy.get('@postCount').then((postCount) => {
+    cy.get("@postCount").then((postCount) => {
       cy.get('[data-cy="post"]').should("have.length", postCount);
     });
   });
@@ -17,7 +17,7 @@ describe("Add new post", () => {
     cy.wait(2000);
     cy.get("aside").contains("coolCat").should("exist");
     cy.getAllPosts();
-    cy.get('@postCount').then((initialPostCount) => {
+    cy.get("@postCount").then((initialPostCount) => {
       cy.contains("Add").click();
       cy.url().should("include", "/addPost");
       cy.get("input[name=title]").type("Crazy frog");
@@ -38,7 +38,7 @@ describe("Add new post", () => {
         .should("include", "https://www.youtube.com/embed/");
 
       cy.getAllPosts();
-      cy.get('@postCount').then((newPostCount) => {
+      cy.get("@postCount").then((newPostCount) => {
         expect(newPostCount).to.equal(Number(initialPostCount) + 1);
       });
     });

@@ -10,8 +10,13 @@ interface CreatePost {
 };
 
 export async function getPosts() {
-  const posts = await db.post.findMany({ include: {author: true}, orderBy: { id: "desc" } });
-  return posts;
+  const posts = await db.post.findMany({ include: {author: true, Like: true
+  }, orderBy: { id: "desc" } });
+  return posts.map((post) => {
+    return {
+      ...post,
+      userLiked: post.Like.some((like) => like.userId === post.authorId),
+    }});
 };
 
 export async function createPost(data: CreatePost) {
@@ -22,16 +27,43 @@ export async function createPost(data: CreatePost) {
   return post;
 };
 
-export const likePost = async (postId: string): Promise<number> => {
+export const checkIfLiked = async (postId: string, userId: string): Promise<boolean> => {
+  const like = await db.like.findFirst({
+    where: {
+      postId,
+      userId,
+    },
+  });
+
+  return !!like;
+};
+
+export const likePost = async (postId: string, userId: string): Promise<number> => {
+  await db.like.create({
+    data: {
+      postId,
+      userId,
+    },
+  });
+
   const post = await db.post.update({
     where: { id: postId },
     data: { likes: { increment: 1 } },
   });
 
-  return post.likes; 
+  return post.likes;
 };
 
-export const unlikePost = async (postId: string): Promise<number> => {
+export const unlikePost = async (postId: string, userId: string): Promise<number> => {
+  await db.like.delete({
+    where: {
+      postId_userId: {
+        postId,
+        userId,
+      },
+    },
+  });
+
   const post = await db.post.update({
     where: { id: postId },
     data: { likes: { decrement: 1 } },
