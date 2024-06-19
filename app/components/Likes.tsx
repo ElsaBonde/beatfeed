@@ -4,6 +4,7 @@ import { FavoriteBorderOutlined, FavoriteOutlined } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { checkIfLiked, likePost, unlikePost } from "../actions/postActions"; // Lägg till checkIfLiked från actions
 import { useAuth } from "../authContext";
+import { useRouter } from "next/navigation";
 
 interface LikesProps {
   postId: string;
@@ -14,6 +15,7 @@ const Likes: React.FC<LikesProps> = ({ postId, startingLikes }) => {
   const [likes, setLikes] = useState(startingLikes);
   const [isLiked, setIsLiked] = useState(false);
   const { isLoggedIn, user } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchLikeStatus = async () => {
@@ -32,8 +34,7 @@ const Likes: React.FC<LikesProps> = ({ postId, startingLikes }) => {
         console.log(
           "You have to be logged in to like a post, redirecting to login page."
         );
-        window.location.href = "/login";
-        
+        router.push("/login");
       }
       if (isLiked) {
         const newLikes = await unlikePost(postId, user.id);

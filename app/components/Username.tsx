@@ -10,7 +10,7 @@ export default function Username() {
   return (
     <div>
       {isLoggedIn ? (
-        <p className="font-bold">{user && user.userName}</p>
+        <p className="font-bold" data-cy="userName">{user && user.userName}</p>
       ) : (
         <Link href="/register" className="flex gap-1">
           <AddIcon />

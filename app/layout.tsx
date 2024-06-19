@@ -6,7 +6,7 @@ import "./globals.css";
 import SideBar from "./components/SideBar";
 
 export const metadata: Metadata = {
-  title: "BeatFeed",
+  title: "SoundStream",
   description: "Share your favorite beats with the world!",
 };
 

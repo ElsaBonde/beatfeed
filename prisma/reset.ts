@@ -5,6 +5,7 @@ async function main() {
   if (process.env.NODE_ENV !== "test") return;
 
   // Clear all data in the database so DON'T DO THIS IN PRODUCTION/DEVELOPMENT
+  await db.like.deleteMany({});
   await db.post.deleteMany({});
   await db.user.deleteMany({});
 }
