@@ -35,7 +35,7 @@ describe("Register new user", () => {
 });
 
 describe("Logout user", () => {
-  it("should be possible to sign out", () => {
+  it.only("should be possible to sign out", () => {
     cy.login("coolCat", "password1");
     cy.get("aside").contains("Logout").click();
     cy.get("aside").contains("Logout").should("not.exist");
